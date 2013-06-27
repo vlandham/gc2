@@ -1,79 +1,238 @@
+
 <!DOCTYPE html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Gc2 : " />
+    <title>HTML5 Genetic Algorithm 2D Car Thingy - Chrome recommended</title>
+    <style>
+      #mainbox {
+        width: 800px;
+        height: 400px;
+        border: 1px solid red;
+      }
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+      #div {
+        width: 800px;
+        height: 400px;
+        border: 1px solid black;
+      }
 
-    <title>Gc2</title>
+      #data {
+        position: absolute;
+        left: 810px;
+        top: 20px;
+        width: 300px;
+        height: 400px;
+      }
+
+      #graphholder {
+        position: relative;
+      }
+
+      #graphholder .scale {
+        position: absolute;
+        left: 405px;
+        font-size: 9px;
+      }
+
+      #s0 { top: 200px; }
+      #s25 { top: 150px; }
+      #s50 { top: 100px; }
+      #s75 { top: 50px; }
+      #s100 { top: 0px; }
+
+      #graphcanvas {
+        border: 1px solid black;
+      }
+
+      #topscoreholder {
+        width: 300px;
+        height: 400px;
+        position: absolute;
+        top: 420px;
+        left: 445px;
+        font-size: 11px;
+      }
+
+      #minimap {
+      }
+
+      #minimapholder {
+        position: relative;
+        border: 1px solid black;
+        width: 800px;
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .minimapmarker {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1px;
+        height: 200px;
+        z-index: 5;
+        border-left: 1px solid #444;
+        font-size: 9px;
+        padding-left: 2px;
+      }
+
+      .silverdot {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1px;
+        height: 200px;
+        z-index: 4;
+      }
+
+      #minimapfog {
+        width: 798px;
+        height: 198px;
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        z-index: 2;
+        background-color: white;
+      }
+
+      #minimapcamera {
+        position: absolute;
+        top: 0px;
+        left: 1px;
+        height: 199px;
+        width: 50px;
+        z-index: 3;
+        border: 1px dashed #888;
+      }
+
+      .healthbar {
+        cursor: pointer;
+        position: relative;
+        border: 1px solid #444;
+        width: 100px;
+        height: 15px;
+        padding: 2px;
+        margin-left: 23px;
+      }
+
+        .healthbar .health {
+          height: 100%;
+          width: 100%;
+          background-color: red;
+        }
+
+        .healthbar .healthtext {
+          position: absolute;
+          top: 0px;
+          left: -20px;
+        }
+
+    </style>
   </head>
-
   <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/vlandham/gc2">View on GitHub</a>
-
-          <h1 id="project_title">Gc2</h1>
-          <h2 id="project_tagline"></h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/vlandham/gc2/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/vlandham/gc2/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
+    <canvas id="mainbox" width="800" height="400"></canvas>
+    <div id="graphholder">
+      <canvas id="graphcanvas" width="400" height="200"></canvas>
+      <div class="scale" id="s100">200</div>
+      <div class="scale" id="s75">150</div>
+      <div class="scale" id="s50">100</div>
+      <div class="scale" id="s25">50</div>
+      <div class="scale" id="s0">0</div>
     </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
+    <div id="minimapholder">
+      <!--<img src="reddot.png" id="minimapmarker" />-->
+      <div id="minimapfog"></div>
+      <canvas id="minimap" width="800" height="200"></canvas>
+      <div id="minimapcamera"></div>
     </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Gc2 maintained by <a href="https://github.com/vlandham">vlandham</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
+    <div id="topscoreholder">
+    <input type="button" value="View top replay" onclick="cw_toggleGhostReplay(this)" /><br />
+      <div id="topscores"></div>
     </div>
-
-    
-
+    <div id="debug"></div>
+    <div id="data">
+      <input type="button" value="Surprise!" onclick="toggleDisplay()" />
+      <input type="button" value="New Population" onclick="cw_resetPopulation()" />
+      <div>
+        Create new world with seed:
+        <input type="text" value="Enter any string" id="newseed" />
+        <input type="button" value="Go!" onclick="cw_confirmResetWorld()" />
+      </div>
+      <div>
+        Mutation rate:
+        <select id="mutationrate" onchange="cw_setMutation(this.options[this.selectedIndex].value)">
+          <option value="0">0%</option>
+          <option value="0.01">1%</option>
+          <option value="0.02">2%</option>
+          <option value="0.03">3%</option>
+          <option value="0.04">4%</option>
+          <option value="0.05" selected="selected">5%</option>
+          <option value="0.1">10%</option>
+          <option value="0.2">20%</option>
+          <option value="0.3">30%</option>
+          <option value="0.4">40%</option>
+          <option value="0.5">50%</option>
+          <option value="0.75">75%</option>
+          <option value="1.0">100%</option>
+        </select>
+      </div>
+      <div>
+        Elite clones:
+        <select id="elitesize" onchange="cw_setEliteSize(this.options[this.selectedIndex].value)">
+          <option value="0">0</option>
+          <option value="1" selected="selected">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div>
+      <div id="generation"></div>
+      <div id="population"></div>
+      <div id="distancemeter"></div>
+      <input type="button" value="Watch Leader" onclick="cw_setCameraTarget(-1)" />
+      <div id="health"></div>
+      <div id="cars"></div>
+    </div>
+    <div id="explanation">
+      <h3>Controls</h3>
+      Suprise: Toggles drawing, makes the simulation faster.<br />
+      New Population: Keeps the generated track and restarts the whole car population.<br />
+      Create new world with seed: The same seed always creates the same track, so you can agree on a seed with your friends and compete. :)<br />
+      Mutation rate: The chance that each gene in each individual will mutate to a random value when a new generation is born.<br />
+      Elite clones: The top n cars that will be copied over to the next generation.<br />
+      View top replay: Pause the current simulation and show the top performing car. Click a second time to resume simulation.
+      <h3>Graph</h3>
+      Red: Top score in each generation.<br />
+      Green: Average of the top 10 cars in each generation.<br />
+      Blue: Average of the entire generation.
+      <h3>But what is it?</h3>
+      The program uses a simple genetic algorithm to evolve random two-wheeled shapes into cars over generations. Loosely based on <a href="http://boxcar2d.com/">BoxCar2D</a>, but
+      written from scratch, only using the same physics engine (<a href="http://box2d.org/">box2d</a>).<br />
+      seedrandom.js written by <a href="http://davidbau.com/">David Bau</a>. (thanks!)
+      <h3>Genome</h3>
+      The genome consists of:<br />
+      - Shape: (8 genes, 1 per vertex)<br />
+      - Wheel size: (2 genes, 1 per wheel)<br />
+      - Wheel position: (2 genes, 1 per wheel)<br />
+      - Wheel density: (2 genes, 1 per wheel) darker wheels mean denser wheels
+      <h3>Blurb</h3>
+      This is not as deterministic as it should be, so your best car may not perform as well as it once did. The terrain gets more complex with distance.<br />
+      I'm not in the mood to deal with checking if all scripts have loaded before running, so refresh the page if things seem whack.<br />
+    </div>
+    <div name="minimapmarker" class="minimapmarker"></div>
+    <div name="healthbar" class="healthbar" onclick="cw_setCameraTarget(this.car_index)">
+      <div name="health" class="health"></div>
+      <div name="healthtext" class="healthtext"></div>
+    </div>
   </body>
+    <script src="seedrandom.js"></script>
+    <script src="box2d.js"></script>
+    <script src="ghost.js"></script>
+    <script src="cawro.js"></script>
 </html>
